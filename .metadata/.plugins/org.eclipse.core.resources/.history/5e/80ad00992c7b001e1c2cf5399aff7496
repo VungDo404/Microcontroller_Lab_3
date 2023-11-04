@@ -32,15 +32,7 @@ void fsm_manual_run(){
 				setTimer(100, 3);
 				status = MAN_YELLOW;
 			}
-			if(isButtonPressed(2) == 1){
-				red_duration_clone++;
-				if(red_duration_clone >= 99) red_duration_clone = red_duration;
-			}
-			if(isButtonPressed(3) == 1){
-				red_duration =  red_duration_clone;
-				green_duration = red_duration - yellow_duration;
-				status = INIT;
-			}
+
 			break;
 		case MAN_YELLOW:
 			setInitialValue(yellow_duration_clone,3);
