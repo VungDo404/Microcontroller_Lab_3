@@ -77,15 +77,7 @@ void fsm_manual_run(){
 				setVerticalLeds(SET,SET, SET);
 				status = INIT;
 			}
-			if(isButtonPressed(2) == 1){
-				green_duration_clone++;
-				if(green_duration_clone >= 99) green_duration_clone = green_duration;
-			}
-			if(isButtonPressed(3) == 1){
-				green_duration =  green_duration_clone;
-				red_duration = green_duration + yellow_duration;
-				status = INIT;
-			}
+
 			break;
 		default:
 			initializeDurationClones();
