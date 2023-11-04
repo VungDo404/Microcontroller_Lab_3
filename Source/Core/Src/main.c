@@ -22,7 +22,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "software_timer.h"
+#include "button.h"
+#include "fsm_automatic.h"
+#include "fsm_manual.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,13 +92,15 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  fsm_automatic_run();
+	  fsm_manual_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -198,7 +203,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED_RED_HORI_Pin|LED_YELLOW_HORI_Pin|LED_GREEN_HORI_Pin|LED_GREEN_VERTI_Pin
-                          |LED_YELLOW_VERTI_Pin|LED_GREEN_VERTIA6_Pin|EN0_Pin|EN1_Pin
+                          |LED_YELLOW_VERTI_Pin|LED_RED_VERTI_Pin|EN0_Pin|EN1_Pin
                           |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
@@ -206,10 +211,10 @@ static void MX_GPIO_Init(void)
                           |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED_RED_HORI_Pin LED_YELLOW_HORI_Pin LED_GREEN_HORI_Pin LED_GREEN_VERTI_Pin
-                           LED_YELLOW_VERTI_Pin LED_GREEN_VERTIA6_Pin EN0_Pin EN1_Pin
+                           LED_YELLOW_VERTI_Pin LED_RED_VERTI_Pin EN0_Pin EN1_Pin
                            EN2_Pin EN3_Pin */
   GPIO_InitStruct.Pin = LED_RED_HORI_Pin|LED_YELLOW_HORI_Pin|LED_GREEN_HORI_Pin|LED_GREEN_VERTI_Pin
-                          |LED_YELLOW_VERTI_Pin|LED_GREEN_VERTIA6_Pin|EN0_Pin|EN1_Pin
+                          |LED_YELLOW_VERTI_Pin|LED_RED_VERTI_Pin|EN0_Pin|EN1_Pin
                           |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -234,7 +239,16 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	timerRun(0); // led duration
+	timerRun(1); //  7-segment counter
+	timerRun(2); // 7-segment display
+	timerRun(3); // blinking led
+	getKeyInput(1);
+	getKeyInput(2);
+	getKeyInput(3);
 
+};
 /* USER CODE END 4 */
 
 /**

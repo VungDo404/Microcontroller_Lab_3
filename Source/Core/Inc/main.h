@@ -68,8 +68,8 @@ void Error_Handler(void);
 #define LED_GREEN_VERTI_GPIO_Port GPIOA
 #define LED_YELLOW_VERTI_Pin GPIO_PIN_5
 #define LED_YELLOW_VERTI_GPIO_Port GPIOA
-#define LED_GREEN_VERTIA6_Pin GPIO_PIN_6
-#define LED_GREEN_VERTIA6_GPIO_Port GPIOA
+#define LED_RED_VERTI_Pin GPIO_PIN_6
+#define LED_RED_VERTI_GPIO_Port GPIOA
 #define EN0_Pin GPIO_PIN_7
 #define EN0_GPIO_Port GPIOA
 #define SEG0_Pin GPIO_PIN_0
