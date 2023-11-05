@@ -45,7 +45,6 @@ void fsm_automatic_run(){
 				status = GREEN_RED;
 			}
 			if(timer_flag[1] == 1){
-				countDown();
 				setTimer(100, 1);
 			}
 			break;
