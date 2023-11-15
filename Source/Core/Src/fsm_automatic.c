@@ -35,6 +35,18 @@ void fsm_automatic_run(){
 				countDown();
 				setTimer(100, 1);
 			}
+			if(isButtonPressed(1) == 1){
+				setHorizontalLeds(SET,SET,SET);
+				setVerticalLeds(SET,SET, SET);
+				setTimer(100, 3);
+				status = MAN_RED;
+			}
+			if(timer_flag[2] == 1){
+				updateClockBuffer();
+				update7SEG(index_led++);
+				if(index_led >= 4) index_led = 0;
+				setTimer(10, 2);
+			}
 			break;
 		case RED_YELLOW:
 			setHorizontalLeds(RESET,SET,SET);
@@ -47,6 +59,12 @@ void fsm_automatic_run(){
 			if(timer_flag[1] == 1){
 				countDown();
 				setTimer(100, 1);
+			}
+			if(timer_flag[2] == 1){
+				updateClockBuffer();
+				update7SEG(index_led++);
+				if(index_led >= 4) index_led = 0;
+				setTimer(10, 2);
 			}
 			break;
 		case GREEN_RED:
@@ -61,6 +79,12 @@ void fsm_automatic_run(){
 				countDown();
 				setTimer(100, 1);
 			}
+			if(timer_flag[2] == 1){
+				updateClockBuffer();
+				update7SEG(index_led++);
+				if(index_led >= 4) index_led = 0;
+				setTimer(10, 2);
+			}
 			break;
 		case GREEN_YELLOW:
 			setHorizontalLeds(SET,RESET,SET);
@@ -74,21 +98,16 @@ void fsm_automatic_run(){
 				countDown();
 				setTimer(100, 1);
 			}
+			if(timer_flag[2] == 1){
+				updateClockBuffer();
+				update7SEG(index_led++);
+				if(index_led >= 4) index_led = 0;
+				setTimer(10, 2);
+			}
 			break;
 		default:
 			break;
 	}
 
-	if(timer_flag[2] == 1){
-		updateClockBuffer();
-		update7SEG(index_led++);
-		if(index_led >= 4) index_led = 0;
-		setTimer(10, 2);
-	}
-	if(status == RED_GREEN && isButtonPressed(1) == 1){
-		setHorizontalLeds(SET,SET,SET);
-		setVerticalLeds(SET,SET, SET);
-		setTimer(100, 3);
-		status = MAN_RED;
-	}
+
 };
